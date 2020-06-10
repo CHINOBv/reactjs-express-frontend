@@ -5,7 +5,7 @@ const Nav = () => {
     <nav className="navbar navbar-dark bg-dark">
       <div className="container">
         <a href="/" className="navbar-brand">
-          <img src="public/img/logo.png" alt="Logo" />
+          <img src="img/logo.png" alt="Logo" />
         </a>
       </div>
     </nav>

@@ -1,25 +1,23 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Nav from "./components/Nav.jsx";
-import UploadImage from "./components/UploadImage.jsx";
-import ImagesC from "./components/images/ImagesC.jsx";
+import Home from './components/Home.jsx';
+import Image from './components/images/Image.jsx';
 
 const App = () => {
   return (
     <>
-      <Nav />
-      <div className="container p-4">
-        <div className="row">
-          <div className="col-md-8">
-            <UploadImage />
-          </div>
-          <div className="col-md-4">
-            <ImagesC />
-          </div>
-        </div>
-      </div>
+      <Router>
+        <Nav/>
+        <Switch>
+          <Route path="/" render={ () => <Home/> }/>
+          <Route path="/image/:id" render={ () => <Image/> }/>
+        </Switch>
+      </Router>
     </>
   );
 };
+      
 
 export default App;
