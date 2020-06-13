@@ -11,6 +11,7 @@
     "bootswatch": "^4.5.0",
     "downloadjs": "^1.4.7",
     "jquery": "^3.5.1",
+    "moment": "^2.26.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
