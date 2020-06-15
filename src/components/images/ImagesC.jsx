@@ -3,20 +3,7 @@ import axios from 'axios';
 
 import ImageC from './ImageC.jsx';
 
-const Api = process.env.REACT_APP_API_HOST;
-
-const ImagesC = () => {
-
-  const [images, setImages] = useState([]);
-
-  const getIMG = async () => {
-    const res = await axios(`${Api}/images`);
-    console.log(res);
-    setImages(res.data.images);
-  };
-  useEffect(() => {
-    getIMG();
-  }, []);
+const ImagesC = ({images}) => {
 
   return (
     <div className="card mt-2">
@@ -28,7 +15,7 @@ const ImagesC = () => {
           {images.map(image => (
             <ImageC 
               key={image._id}
-              id={image.id}
+              id={image._id}
               route={Api+image.directory} 
               fileName={image.filename}
               description={image.description}
