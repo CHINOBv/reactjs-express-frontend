@@ -3,7 +3,20 @@ import axios from 'axios';
 
 import ImageC from './ImageC.jsx';
 
-const ImagesC = ({images}) => {
+const Api = process.env.REACT_APP_API_HOST;
+
+const ImagesC = () => {
+
+  const [images, setImages] = useState([]);
+
+  const getIMG = async () => {
+    const res = await axios(`${Api}/images`);
+    console.log(res);
+    setImages(res.data.images);
+  };
+  useEffect(() => {
+    getIMG();
+  }, []);
 
   return (
     <div className="card mt-2">
