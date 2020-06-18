@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { timeAgo } from "../../helpers/helpers.js";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -9,12 +11,21 @@ const Comment = ({ Api, Id }) => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
 
+  const [comments, setComments] = useState([]);
+
   const toggleBtn = () => {
     if (!showBtn) {
       setShowBtn(true);
     } else {
       setShowBtn(false);
     }
+  };
+
+  const getComments = async () => {
+    const res = await axios(`${Api}/images/${Id}`);
+    //console.log(res);
+
+    setComments(res.data.comments);
   };
 
   const postComment = async (e) => {
@@ -24,8 +35,15 @@ const Comment = ({ Api, Id }) => {
       email,
       comment,
     });
-    console.log(res);
+    //console.log(res);
+    getComments();
   };
+
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
 
   return (
     <div className="card mt-2">
@@ -88,6 +106,26 @@ const Comment = ({ Api, Id }) => {
               </div>
             </form>
           </blockquote>
+          <ul className="list-group p-4">
+            {comments.map((comment) => {
+              const time = timeAgo(comment.timestamp);
+              return (
+                <li className="list-group-item" key={comment._id}>
+                  <div className="row">
+                    <Link className="col text-center" to="#">
+                      <img src={`http://gravatar.com/avatar/${comment.gravatar}?d=monsterid&s=45`} alt=""/>
+                    </Link>
+                    <blockquote className="col">
+                      <p className="lead">{comment.comment}</p>
+                      <footer className="blockquote-footer">
+                        {comment.name} - {time}
+                      </footer>
+                    </blockquote>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       ) : null}
     </div>

@@ -15,6 +15,7 @@ const Image = (props) => {
     console.log(e);
   }
 
+  //Image
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState("");
@@ -25,7 +26,8 @@ const Image = (props) => {
 
   const getImage = async () => {
     const res = await axios(`${Api}/images/${Id}`);
-    console.log(res);
+
+  //Image
     setTitle(res.data.image.title);
     setDescription(res.data.image.description);
     setImg(Api + res.data.image.directory);
@@ -34,6 +36,9 @@ const Image = (props) => {
     setViews(res.data.image.views);
     const time = timeAgo(res.data.image.timestamp);
     setCreatedAt(time);
+
+
+    
   };
   //console.log(createdat)
 
